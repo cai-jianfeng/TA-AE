@@ -9,7 +9,7 @@ Multimodal large language models (MLLMs) have achieved remarkable progress in vi
 2. Classifies videos into temporal-invariant and temporal-variant categories.
 3. Inject offsets at selected layers/heads to mitigate hallucinations relative to the temporal characteristics.
 
-## � Methodology
+## 🧠 Methodology
 
 Our approach, **TA-AE**, operates in two main phases:
 
@@ -24,14 +24,14 @@ Our approach, **TA-AE**, operates in two main phases:
     - We inject the corresponding pre-computed offset vectors into the model's attention heads.
     - This steers the model's activations towards truthful representations, mitigating hallucinations without retraining the LLM.
 
-## �📂 Project Structure
+## 📂 Project Structure
 
 The codebase is organized by model architecture:
 
 - `qwen2_5-vl/`: Implementation for Qwen2.5-VL model.
 - `videollama2/`: Implementation for VideoLLaMA2 model, including contrastive decoding support.
 
-## � Dataset
+## 🎥 Dataset
 
 We have released the **TA-AE Dataset** on Hugging Face, which contains a subset of videos and metadata from ShareGPT4Video utilized for our analysis and activation engineering.
 
@@ -39,18 +39,18 @@ We have released the **TA-AE Dataset** on Hugging Face, which contains a subset 
 
 This dataset facilitates the identification of hallucination-sensitive modules by classifying videos into temporal-invariant and temporal-variant categories.
 
-## �🛠️ Usage
+## 🛠️ Usage
 
-### Prerequisites
+### 📋 Prerequisites
 - Python 3.x
 - PyTorch
 - Transformers
 - Other dependencies (see imports in scripts)
 
-### Step 1: Extract Intervention Vectors
+### 1️⃣ Step 1: Extract Intervention Vectors
 First, we use the ShareGPT4Video dataset (or the provided subset) to calculate the intervention vectors. This step involves running `ict_sharegpt4video.py`, which computes both normal and hallucinated activations to derive the "offset vectors".
 
-#### Qwen2.5-VL
+#### 🤖 Qwen2.5-VL
 ```bash
 python qwen2_5-vl/ict_sharegpt4video.py \
     --question_file metadata.jsonl \
@@ -60,7 +60,7 @@ python qwen2_5-vl/ict_sharegpt4video.py \
     --ratio 4
 ```
 
-#### VideoLLaMA2
+#### 🦙 VideoLLaMA2
 ```bash
 python videollama2/ict_sharegpt4video.py \
     --question_file metadata.jsonl \
@@ -77,10 +77,10 @@ python videollama2/ict_sharegpt4video.py \
 - `--mode`: Operation mode, e.g., `action` or `temporal`.
 - `--ratio`: Frame subsampling ratio used to induce hallucination (default: 4).
 
-### Step 2: Inject Vectors & Evaluate
+### 2️⃣ Step 2: Inject Vectors & Evaluate
 After extracting the vectors, we use `val_ict_mcq.py` to inject these vectors during inference. This script is specifically designed for the **Multiple Choice Question (MCQ)** subtask of the [VidHalluc](https://www.arxiv.org/pdf/2412.03735) benchmark.
 
-#### Qwen2.5-VL
+#### 🤖 Qwen2.5-VL
 ```bash
 python qwen2_5-vl/val_ict_mcq.py \
     --question_file path/to/vidhalluc_mcq.json \
@@ -93,7 +93,7 @@ python qwen2_5-vl/val_ict_mcq.py \
     --ratio 4
 ```
 
-#### VideoLLaMA2
+#### 🦙 VideoLLaMA2
 ```bash
 python videollama2/val_ict_mcq.py \
     --question_file path/to/vidhalluc_mcq.json \
