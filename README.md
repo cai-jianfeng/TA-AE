@@ -117,7 +117,7 @@ python videollama2/val_ict_mcq.py \
 
 **Note:** `val_ict_mcq.py` focuses on the MCQ subtask. For other tasks or benchmarks, appropriate evaluation scripts adapting the vector injection logic would be required.
 
-⚠️ Troubleshooting: Video Reading Errors. If you encounter an error when reading videos, it is likely a bug in `decord`. You can switch the video reading class from `VideoReader` to `SafeVideoReader` as shown below.
+⚠️ **Troubleshooting: Video Reading Errors.** If you encounter an error when reading videos, it is likely a bug in `decord`. You can switch the video reading class from `VideoReader` to `SafeVideoReader` as shown below.
 
 ```python
 class SafeVideoReader(VideoReader):
